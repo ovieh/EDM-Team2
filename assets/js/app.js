@@ -12,8 +12,9 @@
  var name, role, date, rate;
  var database = firebase.database();
 //Function to add a new employee
- function addEmployee() {
+ function addEmployee(){
  	event.preventDefault();
+ 	console.log("WORKS!");
  	name = $("#name-input").val().trim();
  	role = $("#role-input").val();
  	date = $("#date-input").val();
