@@ -1,6 +1,19 @@
 var name, role, date, rate;
 
 
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA11elUq2gNmvvDxPouHf1PrRHR87XwaB4",
+    authDomain: "silent-sonics.firebaseapp.com",
+    databaseURL: "https://silent-sonics.firebaseio.com",
+    projectId: "silent-sonics",
+    storageBucket: "",
+    messagingSenderId: "1831096365"
+  };
+  firebase.initializeApp(config);
+
+
 function addEmployee(){
 	event.preventDefault();
 	name = $("#name-input").val().trim();
