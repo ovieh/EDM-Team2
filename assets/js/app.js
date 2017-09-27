@@ -8,9 +8,10 @@
  	messagingSenderId: "1831096365"
  };
  firebase.initializeApp(config);
+ //Initialize var
  var name, role, date, rate;
  var database = firebase.database();
-
+//Function to add a new employee
  function addEmployee() {
  	event.preventDefault();
  	name = $("#name-input").val().trim();
@@ -19,6 +20,14 @@
  	rate = $("#rate-input").val();
  	if (name != "" && role != "" && date != "" && rate > 0) {
  		console.log("WORKS!");
+ 		//Push to firebase
+ 		database.ref().push({
+ 			name: name,
+ 			role: role,
+ 			date: date,
+ 			rate: rate,
+ 			dateAdded: firebase.database.ServerValue.TIMESTAMP
+ 		})
  	}
  }
  //Click event for submit button
