@@ -11,14 +11,18 @@
  //Initialize var
  var name, role, date, rate;
  var database = firebase.database();
+ //var ref = database.ref("server/saving-data/fireblog/posts");
+
 //Function to add a new employee
  function addEmployee(){
  	event.preventDefault();
  	console.log("WORKS!");
+ 	//Declare var
  	name = $("#name-input").val().trim();
- 	role = $("#role-input").val();
- 	date = $("#date-input").val();
- 	rate = $("#rate-input").val();
+ 	role = $("#role-input").val().trim();
+ 	date = $("#date-input").val().trim();
+ 	rate = $("#rate-input").val().trim();
+ 	//If the inputs forms are NOT empty then
  	if (name != "" && role != "" && date != "" && rate > 0) {
  		console.log("WORKS!");
  		//Push to firebase
@@ -29,7 +33,30 @@
  			rate: rate,
  			dateAdded: firebase.database.ServerValue.TIMESTAMP
  		})
+ 	}else{
+ 		alert("Fill all fields to add a new employee!")
  	}
  }
  //Click event for submit button
  $(document).on("click", "#submit", addEmployee);
+ 
+
+ //asynchronous callback to read the data at our posts reference
+ database.ref().on("child_added", function(childSnapshot) {
+  console.log(childSnapshot.val());
+  var name = childSnapshot.val().name;
+  var role = childSnapshot.val().role;
+  var date = childSnapshot.val().date;
+  var rate = childSnapshot.val().rate;
+  var monthWorked = "n/a";
+  var billed = "n/a";
+  var tableDiv = ("<tr><td>"+name+"</td>"+"<td>"+ role +"</td>"+"<td>"+ date +"</td>"+"<td>"+ billed +
+  	"<td>"+ rate + "</td>"+"<td>"+ monthWorked +"</td>"+"</td>"+"</tr>");
+  
+  console.log(name);
+
+  $("#tableBody").append(tableDiv);
+
+ }, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+ });
