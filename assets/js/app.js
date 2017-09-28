@@ -54,9 +54,19 @@
   	"<td>"+ rate + "</td>"+"<td>"+ monthWorked +"</td>"+"</td>"+"</tr>");
   
   console.log(name);
+  console.log(moment(1506555728432).format('DD/MM/YY'));
 
   $("#tableBody").append(tableDiv);
-
+  getMonthsWorked(childSnapshot);
  }, function (errorObject) {
   console.log("The read failed: " + errorObject.code);
  });
+
+
+function getMonthsWorked(childSnapshot) {
+	var now = moment();
+	var difference = now.diff(childSnapshot.val().date)
+	var duration = moment.duration();
+	console.log(difference);
+}
+
